@@ -1,1 +1,6 @@
 GitHub 연습 중입니다 .! 
+
+
+git add practice.txt
+git commit -m "Add practice.txt for GitHub practice"
+git push -u origin main
