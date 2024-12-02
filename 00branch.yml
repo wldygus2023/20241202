@@ -1,0 +1,139 @@
+1.브랜치 생성 및 병합 연습
+- 새로운 브랜치를 생성하여 작업한 뒤 , main 브랜치로 변합하는 과정을 연습합니다.
+
+  1번째 연습 시나리오
+    1. 새로운 브랜치 생성 
+    # git checkout -b feature-branch 
+    2. practice.txt 파일 수정 
+    # 새로운 기능 개발 중입니다 .
+    3. 수정 사항 커밋 
+    # git add practice.txt
+    # git commit -m "Update practice.txt with feature content"
+    4. 브랜치 병합
+    # git checkout main 
+    # git merge feature-branch
+    5. 병합 완료 후 브랜치 삭제 
+    # git branch -d feature-branch
+
+
+2. 충돌 상황 만들기 및 해결
+- 출돌이 발생하는 상황을 의도적으로 만들어 보고 이를 해결 
+
+  연습 시나리오 
+    1. main 브랜치에서 파일 수정 후 커밋. 
+    2. 다른 브랜치에서 동일한 파일의 같은 부분을 수정 후 커밋 .
+    3. 두 브랜치를 병합 시도 
+      # git merge <브랜치 이름>
+    4. 충돌 메시지가 뜨면 vscode에서 충돌 파일을 열어 수동으로 해결하고 커밋 . 
+
+  실행 코드 
+    1. main 브랜치로 이동 
+    # git checkout main 
+    2. main 브랜치 최신화 (이미 푸시된 변경 사항이 있다면 )
+    # git pull origin main
+    3. main 브랜치에서 파일 수정 및 커밋 
+      1. practice.txt 파일을 열어 아래 내용을 추가하거나 수정
+      # 이 내용을 main 브랜치에서 수정된 내용입니다. 
+      2. 변경 사항을 커밋 
+      # git add practice.txt
+      # git commit -m "Update practice.txt on main branch"
+      3. 새 브랜치 생성 후 동일 파일 수정 
+        1.새 브랜치 생성 
+        #git checkout -b feature-branch
+        2.practice.txt 파일을 열어 같은 부분을 다른 내용으로 수정 
+        # 이 내용은 feature-branch에서 수정된 내용 
+        3.변경 사항을 커밋 
+        # git add practice.txt
+        # git commit -m "Update practice.txt on feature branch"
+        4.브랜치 병합 및 충돌 확인 
+          1. main 브랜치로 이동 
+          # git checkout main 
+          2. feature-branch 병합 시도 
+          # git merge feature-branch
+          3. 충돌 메시지 확인 
+          # "CONFLICT(content): Merge confilich in practice.txt" 등의 메시지가 출력됩니다.
+        5.충돌 해결 
+          1. vscode에서 충돌 파일 열기 
+          - vs code에서 practice.txt 파일을 열면 충돌 지점이 아래와 같이 표시됩니다.
+            <<<<<<< HEAD
+            이 내용은 main 브랜치에서 수정된 내용입니다.
+            =======
+            이 내용은 feature-branch에서 수정된 내용입니다.
+            >>>>>>> feature-branch
+
+          2. 충돌을 수동으로 해결
+          - 두 브랜치의 내용을 병합하거나 하나를 선택해 수정 
+          # 이 내용은 main 브랜치와 feature-branch에서 병합된 내용입니다.
+          # 수정후 저장 
+
+          3. 수정된 파일 Staging Area에 추가 
+          # git add practice.txt 
+
+          4. 병합 완료 커밋 
+          # git commit -m "Resolve merge conflict in practice. txt "
+
+        6. 브랜치 정리
+          1. feature-branch 삭제 (병합 완료 후 불필요한 경우 )
+          # git branch -d feature-branch 
+          
+        7. 변경사항 푸시
+          1. 병합된 결과를 원격 브랜치에 푸시
+          # git push origin main 
+        
+        8. 변경사항 확인
+          1. git 로그 확인
+          # git log --oneline --graph --decorate
+          2. gitHub에서 최종 상태 확인 
+          # 깃허브 레지스토리에 접속하여 파일이 출돌 없이 업데이트 되었는지 확인 
+          
+
+3. GitHub 협업 시나리오 
+- Pull Request와 리뷰 과정을 연습합니다.
+
+  연습 시나리오 
+  1. 새로운 브랜치에서 작업 후 푸시 
+    # git push origin feature-branch 
+
+  2.GitHub에서 Pull Request 생성.
+  3.Pull Request를 컴토하고 병합. 
+  3.병합된 내용을 로컬에 반영 
+  # git pull orgin main 
+
+4. Rebase 연습
+- Rebase를 사용해 커밋 히스토리를 깔끔하게 정리하는 방법을 연습합니다. 
+
+  연습시나리오
+  1. 새로운 브랜치 생성 후작업.
+  2. main 브랜치에 새 커밋 추가.
+  3. 작업 중인 브랜치에서 Rebase
+  # git rebase main 
+  4. 충돌이 발생하면 해결 후 진행 :
+  # git rebasew --continue
+
+5. Git Tag와 릴리즈 
+- 특정 커밋에 태그를 추가하고 릴리즈로 관리하는 연습을 합니다 .
+  
+  연습 시나리오
+  1. 특정 커밋에 태그 추가
+  2. 태그 푸시 
+
+6. Git Stash 연습
+- 작업 중이던 변경 사항을 임시로 저장하고 복원하는 방법을 연습합니다. 
+  
+  연습 시나리오 
+  1.파일 수정 후 Stash
+  # git stach 
+  2. Stash 확인
+  # git stash list 
+  3. Stash 복원 
+  # git stash apply 
+
+7. 파일 삭제 및 복원 
+- 실수로 삭제된 파일을 복원하거나 특정 커밋 상태로 되돌리는 연습 
+  연습 시나리오
+  1.파일 삭제
+  #rm practice.txt
+  # git status 
+
+  2.복원
+  # git restore practice.txt 

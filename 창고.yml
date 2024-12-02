@@ -1,0 +1,25 @@
+GitHub 연습 중입니다 .! 
+
+
+git add practice.txt
+git commit -m "Add practice.txt for GitHub practice"
+git push -u origin main
+
+
+터미널에서 확인
+현재 브런치와 상태 확인
+    git status
+원격 브랜치와 동기화 상태 확인 
+    git branch -vv
+Push 기록 확인 : 
+    git log --oneline --graph --decorate 
+
+    --oneline 
+    # 각 커밋을 한줄로 요약합니다.
+    # 커밋 해시와 커밋 메시지만 표시되므로 간결하게 로그를 볼 수 있습니다.
+    --graph:
+    # 커밋의 브랜치와 병합 관계를 시각적으로 보여줍니다. 
+    
+
+깃을 활용하여 연습 예제문제도 계속 할 수 있겠네 
+이걸 시스템화 하면 좋겠는데 
