@@ -155,7 +155,7 @@
             git add .
             git commit -m "Resolve revert conflict"
     4. 참고 홈페이지 https://velog.io/@njs04210/Git-reset%EA%B3%BC-revert-%EC%95%8C%EA%B3%A0-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
-    
+                https://www.devpools.kr/2017/01/31/%EA%B0%9C%EB%B0%9C%EB%B0%94%EB%B3%B4%EB%93%A4-1%ED%99%94-git-back-to-the-future/ 
 
 8강 Git log와 Tag로 작업 관리
     1. git log로 히스토리 확인
