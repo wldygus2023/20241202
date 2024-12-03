@@ -1,0 +1,184 @@
+목요일 모임을 위한 깃 활용법 정리 
+- 터미널에서 깃 하는 방법을 배우자 
+
+
+1강 
+- 폴더 생성 및 깃 허브 세팅 
+    1. https://github.com/  깃헙 접속하기 
+    2. Repositories 접속하여 New 새롭게 생성한다 
+    3. 생성이 완료 Quick setup라고 git 설치 메뉴얼이 나온다 복사해서 로컬 폴더에 터미널에 넣어서 실행 시키자
+    4. 깃헙이 연결된걸 볼 수 있을것이다 .
+
+2강  
+- Git 기본작업
+    1. 작업할 파일을 수정을한다
+    2. 파일 상태 확인 
+        git status # 명령어를 사용하여 현재 상태를 확인
+    3. 파일 스테이징 
+        git add README.md # 변경된 파일을 스테이징한다. 
+    4. 커밋 
+        git commit -m "Initial commit" #스테이징 된 파일을 커밋한다.
+    5. 원격 저장소로 푸시 
+        git push origin main # 변경사항을 GitHub로 푸시한다 
+
+3강 
+- 브랜치 및 협업 
+    : 브랜치는 Git에서 독립적으로 작업할 수 있는 "작업 공간" 입니다.
+    : 브랜치를 사용하면 메인 작업(예:main)에 영향을 주지 않고 실험이나 기능 개발을 할 수 있습니다 .
+
+    1. 브랜치 확인
+        git branch # 현재 브랜치와 모든 브랜치를 확인합니다.
+    2. 브랜치 생성
+        git branch feature-branch # 새로운 브랜치를 생성한다.
+        - feature-branch는 새 브랜치 이름으로 원하는 이름으로 변경 가능하다.
+    3. 브랜치 이동 
+        git checkout feature-branch # 생성한 브랜치로 이동한다.
+    4. 변경사항 작업 및 커밋
+        # 브랜치에서 파일을 수정한뒤 , 변경 사항을 커밋한다.
+    5. 원격 저장소에 브랜치 푸시 
+        git push origin feature-branch #새로운 브랜치를 원격 저장소로 푸시한다.
+
+
+4강 
+- 브랜치 병합 
+    : 작업이 완료된 브랜치를 main 브랜치로 병합하는 과정
+
+    1. main 브랜치로 이동
+        git checkout main # 병합하기 전에 main 브랜치로 이동한다.
+    2. 병합 
+        git merge feature-branch # 작업한 브랜치를 병합한다.
+    3. 병합 후 브랜치 삭제 
+        git branch -d feature-branch # 병합이 완료되면 작업이 끝난 브랜치를 삭제한다 .
+    4. 병합 결과 푸시
+        git push origin main # 병합된 내용을 원격 저장소로 푸시한다.
+
+5강 
+- 브랜치 협업 
+    1. 팀원이 만든 브랜치 가져오기 
+        git fetch # 원격 저장소의 모든 브랜치를 가져온다 .
+        git checkout feature-branch # 특정 브랜치를 로컬로 체크아웃한다.
+    2. 충돌방지
+        git pull origin main # 팀원의 최신 변경사항을 병합하여 충돌을 방지한다.
+    3. 충돌 해결 (필요시)
+        git add . 
+        git commit -m "Resolve merge conflict" # 충돌 발생시 , 출돌 내용을 수동으로 수정한 뒤 
+        (이건 수정하는법 직접 보여줌 정리하기 ?? 아직 부족 )
+    4. 충돌 방지를 위한 팁
+        git pull origin main # 작업 시작전에 항상 원격 저장소의 최신 코드를 가져오기 
+        작은 작업 단위로 커밋  # 충돌을 방지하려면 변경 사항을 작은 단위로 커밋하여 팀원과의 작업 동기화를 쉽게 만듬
+        명확한 브랜치 네이밍 # 브랜치 이름을 명확히 지정하여 팀원이 작업 내용을 쉽게 이해할 수 있도록 예) feature/로그인기능.
+
+6강 
+- 충돌 상황 만들기 및 해결
+    연습 시나리오 
+    1. main 브랜치에서 파일 수정 후 커밋. 
+    2. 다른 브랜치에서 동일한 파일의 같은 부분을 수정 후 커밋 .
+    3. 두 브랜치를 병합 시도 
+      # git merge <브랜치 이름>
+    4. 충돌 메시지가 뜨면 vscode에서 충돌 파일을 열어 수동으로 해결하고 커밋 . 
+
+  실행 코드 
+    1. main 브랜치로 이동 
+    # git checkout main 
+    2. main 브랜치 최신화 (이미 푸시된 변경 사항이 있다면 )
+    # git pull origin main
+    3. main 브랜치에서 파일 수정 및 커밋 
+      1. practice.txt 파일을 열어 아래 내용을 추가하거나 수정
+      # 이 내용을 main 브랜치에서 수정된 내용입니다. 
+      2. 변경 사항을 커밋 
+      # git add practice.txt
+      # git commit -m "Update practice.txt on main branch"
+      3. 새 브랜치 생성 후 동일 파일 수정 
+        1.새 브랜치 생성 
+        #git checkout -b feature-branch
+        2.practice.txt 파일을 열어 같은 부분을 다른 내용으로 수정 
+        # 이 내용은 feature-branch에서 수정된 내용 
+        3.변경 사항을 커밋 
+        # git add practice.txt
+        # git commit -m "Update practice.txt on feature branch"
+        4.브랜치 병합 및 충돌 확인 
+          1. main 브랜치로 이동 
+          # git checkout main 
+          2. feature-branch 병합 시도 
+          # git merge feature-branch
+          3. 충돌 메시지 확인 
+          # "CONFLICT(content): Merge confilich in practice.txt" 등의 메시지가 출력됩니다.
+        5.충돌 해결 
+          1. vscode에서 충돌 파일 열기 
+          - vs code에서 practice.txt 파일을 열면 충돌 지점이 아래와 같이 표시됩니다.
+            <<<<<<< HEAD
+            이 내용은 main 브랜치에서 수정된 내용입니다.
+            =======
+            이 내용은 feature-branch에서 수정된 내용입니다.
+            >>>>>>> feature-branch
+
+          2. 충돌을 수동으로 해결
+          - 두 브랜치의 내용을 병합하거나 하나를 선택해 수정 
+          # 이 내용은 main 브랜치와 feature-branch에서 병합된 내용입니다.
+          # 수정후 저장 
+
+          3. 수정된 파일 Staging Area에 추가 
+          # git add practice.txt 
+
+          4. 병합 완료 커밋 
+          # git commit -m "Resolve merge conflict in practice. txt "
+
+        6. 브랜치 정리
+          1. feature-branch 삭제 (병합 완료 후 불필요한 경우 )
+          # git branch -d feature-branch 
+          
+        7. 변경사항 푸시
+          1. 병합된 결과를 원격 브랜치에 푸시
+          # git push origin main 
+        
+        8. 변경사항 확인
+          1. git 로그 확인
+          # git log --oneline --graph --decorate
+          2. gitHub에서 최종 상태 확인 
+          # 깃허브 레지스토리에 접속하여 파일이 출돌 없이 업데이트 되었는지 확인 
+          
+7강 Git Reset과 Revert로 실수 복구하기
+    1.Reset과 Revert의 차이
+        - Reset # 특정 시점으로 되돌리고 이후의 히스토리를 삭제합니다.
+        - Revert # 특정 커밋을 되돌리지만 이후의 히스토리를 유지하고 새 커밋으로 기록합니다.
+    2.Reset 활용 
+        1. 최근 스테이징 취소 
+        git reset HEAD 파일명 # 스테이징된 파일을 스테이징 취소 상태로 되돌립니다.
+        2. 커밋 되돌리기 
+        git reset --soft HEAD~1 # 마지막 커밋을 되돌리고, 작업 내용은 유지합니다.
+        3. 완전히 이전 상태로 되돌리기 
+        git reset --hard HEAD~1 # 마지막 커밋을 되돌리고 , 작업 내용도 삭제됩니다. 
+        4. 특정 커밋으로 리셋 
+        git reset --hard 커밋해시 # 특정 커밋을 되돌리고 , 이후 히스토리는 유지합니다.
+    3. 충돌 발생시 Revert처리 
+        1. 충돌 내용을 수정한 후 
+            git add .
+            git commit -m "Resolve revert conflict"
+    4. 참고 홈페이지 https://velog.io/@njs04210/Git-reset%EA%B3%BC-revert-%EC%95%8C%EA%B3%A0-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+    
+
+8강 Git log와 Tag로 작업 관리
+    1. git log로 히스토리 확인
+        git log # 기본 로그 보기 
+    2. 한 줄로 요약된 로그 보기 
+        git log --oneline # 한줄로 요약된 로그 
+    3. Tag로 특정 커밋 표시
+        1. 새로운 태그 추가 
+            git tag -a v1.0 -m "버전 1.0"
+        2. 태그 푸시 
+            git push origin v1.0
+        3. 특정 태그로 이동  
+            git checkout 태그이름 # 태그 체크아웃
+
+
+        
+끝으로 
+- git Flow 전략 활용 
+
+-3. 팀 작업 효율화
+
+	•	리뷰 요청
+	•	GitHub에서 Pull Request를 생성하고 리뷰를 요청합니다.
+	•	자동화
+	•	GitHub Actions나 CI/CD 도구를 활용하여 코드 품질을 보장합니다.
+
