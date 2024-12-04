@@ -32,7 +32,11 @@ REST API 생성과정  . Express.js를 사용하여 환경 변수 설정
     - .env 파일 생성
         touch .env
     - .env 파일에 포트 번호 저장 
-        ROR=3000
+        PORT=3000
+
+        Express 기본 서버 및 .env 환경 변수 설정
+        - Express 서버 초기 설정 완료 (.env 파일 포함)
+        - Express 기본 서버 및 포트 설정 추가
 
 3. CRUD API 만들기 
 
