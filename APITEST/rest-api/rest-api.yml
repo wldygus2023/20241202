@@ -1,0 +1,106 @@
+REST API 생성과정  . Express.js를 사용하여 환경 변수 설정
+
+1. 초기화 과정 
+  1. 프로젝트 폴더 생성 및 Express 설치
+    mkdir rest-api
+    cd rest-api
+
+  2. node.js 초기화
+    npm init -y
+
+  3. Express 설치
+    npm install express dotenv
+    
+2. 기본 서버 생성
+
+  1.index.js
+    touch index.js
+  2.기본 Express 서버 코드 작성
+    const express = require('express');
+    const app = express();
+    require('dotenv').config(); // 환경 변수 로드
+
+    app.use(express.json());
+
+    // 기본 라우트
+    app.get('/', (req, res) => res.send('Hello, Express!'));
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+  3. 환경 변수 파일 생성 
+    - .env 파일 생성
+        touch .env
+    - .env 파일에 포트 번호 저장 
+        ROR=3000
+
+3. CRUD API 만들기 
+
+  1. JSON 데이터 구조 정의 
+    data.js 파일 생성 
+      const todos = [
+          { id: 1, title: 'Learn Express', completed: false },
+          { id: 2, title: 'Build REST API', completed: true }
+      ];
+      module.exports = todos;
+  
+  2. API 라우트 작성 
+    index.js에 CRUD 라우트를 추가 
+      const todos = require('./data');
+
+        // GET: 모든 Todo 조회
+        app.get('/api/todos', (req, res) => {
+            res.json(todos);
+        });
+
+        // POST: 새로운 Todo 추가
+        app.post('/api/todos', (req, res) => {
+            const newTodo = {
+                id: todos.length + 1,
+                title: req.body.title,
+                completed: false
+            };
+            todos.push(newTodo);
+            res.status(201).json(newTodo);
+        });
+
+        // PUT: 특정 Todo 수정
+        app.put('/api/todos/:id', (req, res) => {
+            const todo = todos.find(t => t.id === parseInt(req.params.id));
+            if (!todo) return res.status(404).send('Todo not found.');
+
+            todo.title = req.body.title;
+            todo.completed = req.body.completed;
+            res.json(todo);
+        });
+
+        // DELETE: 특정 Todo 삭제
+        app.delete('/api/todos/:id', (req, res) => {
+            const index = todos.findIndex(t => t.id === parseInt(req.params.id));
+            if (index === -1) return res.status(404).send('Todo not found.');
+
+            const deletedTodo = todos.splice(index, 1);
+            res.json(deletedTodo);
+        });
+
+4. 테스트 
+  1. 서버 실행 
+    node index.js
+  2. API 테스트
+    GET /api/todos: 모든 Todo 조회.
+	  POST /api/todos: 새로운 Todo 추가. (JSON 데이터: { "title": "New Task" })
+	  PUT /api/todos/:id: 특정 Todo 수정. (JSON 데이터: { "title": "Updated Task", "completed": true })
+	  DELETE /api/todos/:id: 특정 Todo 삭제.
+
+
+5. 폴더구조 
+  rest-api-practice/
+  ├── .env
+  ├── data.js
+  ├── index.js
+  ├── package.json
+  └── node_modules/
+
+6. 커밋 메시지 
+  git add .
+  git commit -m "feat(api): 기본 REST API 구현 (CRUD 기능 추가)"
